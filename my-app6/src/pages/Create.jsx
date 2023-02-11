@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Layout from "../components/Layout";
 import { usoAppContext } from "../store/Store";
 const Create = () => {
   const [title, setTitle] = useState("");
@@ -8,6 +9,7 @@ const Create = () => {
   const [intro, setIntro] = useState("");
   const [completed, setCompleted] = useState(false);
   const [review, setReview] = useState("");
+  const navigate = useNavigate();
 
   const store = usoAppContext();
 
@@ -32,6 +34,7 @@ const Create = () => {
       review,
     };
     store.createItem(newBook);
+    navigate("/");
   };
   //Todo para registrar
   const handleChange = (e) => {
@@ -58,9 +61,7 @@ const Create = () => {
   };
 
   return (
-    <div>
-      <Link to="/">Home</Link>
-
+    <Layout>
       <form onSubmit={handleSubmit}>
         <div>
           <div>Title</div>
@@ -116,7 +117,7 @@ const Create = () => {
         </div>
         <button>Enviar</button>
       </form>
-    </div>
+    </Layout>
   );
 };
 export default Create;

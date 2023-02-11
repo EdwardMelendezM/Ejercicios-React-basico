@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
+import Book from "../components/Book";
+import Layout from "../components/Layout";
 import { usoAppContext } from "../store/Store";
 
 const Index = () => {
   const { items } = usoAppContext();
   return (
-    <div>
-      <Link to="/create">Home</Link>
-
+    <Layout>
       {items.map((item) => (
-        <div>{item.title}</div>
+        <Book key={item.id} item={item} />
       ))}
-    </div>
+    </Layout>
   );
 };
 
