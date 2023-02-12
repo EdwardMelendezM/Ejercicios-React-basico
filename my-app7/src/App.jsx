@@ -1,5 +1,19 @@
 import { useState } from "react";
 import SearchBar from "./components/SearchBar";
+import styled from "styled-components";
+const Button = styled.button`
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: white;
+  border: solid 1px #ccc;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #efefef;
+  }
+`;
+
 const peaple = [
   {
     id: "peaple-01",
@@ -70,7 +84,7 @@ const emails = [
 function App() {
   const [data, setData] = useState([...peaple, ...calendar, ...emails]);
   const [selection, setSelection] = useState(null);
-  const [currentOption, setCurrentOption] = useState("all");
+  const [currentOption, setCurrentOption] = useState("  all");
 
   const handleClick = (e) => {
     const op = e.target.name;
@@ -98,18 +112,18 @@ function App() {
 
   return (
     <div>
-      <button onClick={handleClick} name="all">
+      <Button onClick={handleClick} name="all">
         All
-      </button>
-      <button onClick={handleClick} name="peaple">
+      </Button>
+      <Button onClick={handleClick} name="peaple">
         Peaple
-      </button>
-      <button onClick={handleClick} name="calendar">
+      </Button>
+      <Button onClick={handleClick} name="calendar">
         Calendar
-      </button>
-      <button onClick={handleClick} name="emails">
+      </Button>
+      <Button onClick={handleClick} name="emails">
         Emails
-      </button>
+      </Button>
       <SearchBar items={data} onItemSelected={() => {}} />
     </div>
   );

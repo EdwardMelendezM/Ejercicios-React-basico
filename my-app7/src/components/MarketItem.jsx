@@ -1,4 +1,24 @@
 import { useMemo } from "react";
+import styled from "styled-components";
+const StyledMarket = styled.span`
+  background-color: yellow;
+  font-weight: bold;
+  border-radius: 2px;
+`;
+const StyledItem = styled.a`
+  color: black;
+  display: block;
+  padding: 10px;
+  border: none;
+  text-decoration: none;
+  &:hover {
+    background-color: #4c91ba;
+    color: white;
+  }
+  &:hover span {
+    color: black;
+  }
+`;
 
 const MarketItem = ({ item, query, onClick }) => {
   const { left, center, right } = useMemo(
@@ -13,13 +33,11 @@ const MarketItem = ({ item, query, onClick }) => {
     return { left, right, center };
   }
   return (
-    <button>
+    <StyledItem>
       {left}
-      <span style={{ fontWeight: "bolder", backgroundColor: "yellow" }}>
-        {center}
-      </span>
+      <StyledMarket>{center}</StyledMarket>
       {right}
-    </button>
+    </StyledItem>
   );
 };
 
