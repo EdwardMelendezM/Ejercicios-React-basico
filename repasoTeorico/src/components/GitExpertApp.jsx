@@ -11,7 +11,7 @@ const GitExpertApp = () => {
   };
 
   return (
-    <div>
+    <>
       <h2>Git expert app</h2>
       <hr />
       <AddCategory setCategories={setCategories} />
@@ -20,7 +20,7 @@ const GitExpertApp = () => {
           return <GitGrid key={category} category={category} />;
         })}
       </ol>
-    </div>
+    </>
   );
 };
 

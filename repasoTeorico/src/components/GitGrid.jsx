@@ -25,11 +25,11 @@ const GitGrid = ({ category }) => {
   return (
     <div>
       <h3>{category}</h3>
-      <ol>
+      <div className="card-grid">
         {images.map((img) => {
           return <GifGridItem key={img.id} {...img} />;
         })}
-      </ol>
+      </div>
     </div>
   );
 };

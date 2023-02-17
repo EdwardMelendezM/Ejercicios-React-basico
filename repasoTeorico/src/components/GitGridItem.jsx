@@ -1,7 +1,7 @@
 const GifGridItem = ({ title, url }) => {
   return (
-    <div>
-      <h3>{title}</h3>
+    <div className="card">
+      <p>{title}</p>
       <img src={url} alt={title} />
     </div>
   );
