@@ -6,10 +6,6 @@ const GitExpertApp = () => {
   // const categories = ;
   const [categories, setCategories] = useState(["One punch"]);
 
-  const handleAdd = () => {
-    setCategories((cats) => [...cats, "Hunter x hunter"]);
-  };
-
   return (
     <>
       <h2>Git expert app</h2>
