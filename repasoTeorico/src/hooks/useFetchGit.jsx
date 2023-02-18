@@ -13,7 +13,7 @@ export const useFetchGit = (category) => {
           data: imgs,
           loading: false,
         });
-      }, 3000);
+      }, 2000);
     });
   }, [category]);
 

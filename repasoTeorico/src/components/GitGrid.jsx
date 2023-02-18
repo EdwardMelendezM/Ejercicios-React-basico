@@ -2,14 +2,14 @@ import { useFetchGit } from "../hooks/useFetchGit";
 import GifGridItem from "./GitGridItem";
 
 const GitGrid = ({ category }) => {
-  const { data, loading } = useFetchGit(category);
+  const { data: images, loading } = useFetchGit(category);
 
   return (
     <div>
       <h3>{category}</h3>
-      {loading ? "Cargand ...." : " Data cargada"}
+      {loading && "Cargand ...."}
       <div className="card-grid">
-        {data.map((img) => {
+        {images.map((img) => {
           return <GifGridItem key={img.id} {...img} />;
         })}
       </div>
