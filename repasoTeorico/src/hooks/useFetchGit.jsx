@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getGifs } from "../helpers/getGits";
 
 export const useFetchGit = (category) => {
@@ -8,12 +8,10 @@ export const useFetchGit = (category) => {
   });
   useEffect(() => {
     getGifs(category).then((imgs) => {
-      setTimeout(() => {
-        setState({
-          data: imgs,
-          loading: false,
-        });
-      }, 2000);
+      setState({
+        data: imgs,
+        loading: false,
+      });
     });
   }, [category]);
 
