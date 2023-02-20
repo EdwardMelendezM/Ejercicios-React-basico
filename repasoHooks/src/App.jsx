@@ -6,9 +6,21 @@ import FormWithCustomHook from "./assets/components/02-useEffect/FormWithCustomH
 import MultipleHooks from "./assets/components/03-Examples/MultipleHooks";
 import FocusScreen from "./assets/components/04-useRef/FocusScreen";
 import RealExampleRef from "./assets/components/04-useRef/RealExampleRef";
+import Layout from "./assets/components/05-useLayoutEffect/Layout";
+import Memorize from "./assets/components/06-memos/Memorize";
+import MemoHook from "./assets/components/06-memos/MemoHook";
+import CallbackHook from "./assets/components/06-memos/CallbackHook";
 function App() {
   return (
     <div>
+      <CallbackHook />
+      <hr />
+      <MemoHook />
+      <hr />
+      <Memorize />
+      <hr />
+      <Layout />
+      <hr />
       <RealExampleRef />
       <hr />
       <FocusScreen />

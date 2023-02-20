@@ -9,8 +9,6 @@ const MultipleHooks = () => {
 
   const { quote, author } = !!data && data[0];
 
-  console.log(quote, author);
-
   return (
     <div>
       <h1>Breaking bad codes</h1>
