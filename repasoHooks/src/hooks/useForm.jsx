@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const useForm = (initialState = {}) => {
   const [values, setValues] = useState(initialState);
@@ -9,14 +9,8 @@ const useForm = (initialState = {}) => {
       [target.name]: target.value,
     });
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-  useEffect(() => {
-    console.log("Email cambio");
-  }, [values]);
 
-  return [values, handleInputChange, handleSubmit];
+  return [values, handleInputChange];
 };
 
 export default useForm;
