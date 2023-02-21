@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useState } from "react";
 import "./todoapp.css";
+import TodoList from "./TodoList";
 import { todoReducer } from "./todoReducer";
 
 const init = () => {
@@ -57,24 +58,11 @@ const TodoApp = () => {
       <hr />
       <div className="row">
         <div className="col-7">
-          <ul className="list-group list-group-flush">
-            {todos.map((todo, i) => (
-              <li key={todo.id} className="list-group-item">
-                <p
-                  className={`${todo.done && "complete"}`}
-                  onClick={() => handleToogle(todo.id)}
-                >
-                  {i + 1}. {todo.desc}
-                </p>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => handleDeleleItem(todo.id)}
-                >
-                  Borrar
-                </button>
-              </li>
-            ))}
-          </ul>
+          <TodoList
+            todos={todos}
+            handleToogle={handleToogle}
+            handleDeleleItem={handleDeleleItem}
+          />
         </div>
         <div className="col-5">
           <h4>Agregar</h4>
