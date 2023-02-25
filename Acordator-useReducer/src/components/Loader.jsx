@@ -1,3 +1,4 @@
+import styles from "./loader.module.css";
 const Loader = ({ item, id }) => {
   if (item === null) {
     return <Container>Loading...</Container>;
@@ -10,6 +11,6 @@ const Loader = ({ item, id }) => {
 };
 
 function Container({ children }) {
-  return <Container>{children}</Container>;
+  return <div className={styles.loaderContainer}>{children}</div>;
 }
 export default Loader;

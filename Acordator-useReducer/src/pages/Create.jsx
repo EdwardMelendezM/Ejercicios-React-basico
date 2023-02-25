@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import CreateForm from "../components/CreateForm";
+import Item from "../components/Item";
+import ItemContainer from "../components/ItemContainer";
 import MainContainer from "../components/MainContainer";
 import useReducerApp from "../store/store";
 
@@ -13,20 +15,11 @@ const Create = () => {
   return (
     <MainContainer>
       <CreateForm dispatch={dispatch} />
-      <div>
-        {state.items ? (
-          state.items.map((item) => (
-            <div key={item.url}>
-              <div>{item.shortUrl}</div>
-              <div>{item.url} </div>
-              <div>{item.view} </div>
-              <div>------</div>
-            </div>
-          ))
-        ) : (
-          <p>No hay datos</p>
-        )}
-      </div>
+      <ItemContainer>
+        {state.items.map((item) => (
+          <Item item={item} key={crypto.randomUUID()} />
+        ))}
+      </ItemContainer>
     </MainContainer>
   );
 };

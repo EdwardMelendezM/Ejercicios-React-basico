@@ -1,5 +1,4 @@
-const ItemContainer = () => {
-  return <div>ItemContainer</div>;
-};
-
-export default ItemContainer;
+import style from "./itemContainer.module.css";
+export default function ItemContainer({ children }) {
+  return <div className={style.itemContainer}>{children}</div>;
+}

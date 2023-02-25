@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import style from "./createForm.module.css";
 const CreateForm = ({ dispatch }) => {
   const [url, setUrl] = useState("");
   const handleChange = (e) => {
@@ -14,8 +14,13 @@ const CreateForm = ({ dispatch }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" onChange={handleChange} value={url} />
-      <button>Create Url</button>
+      <input
+        type="text"
+        onChange={handleChange}
+        value={url}
+        className={style.input}
+        placeholder="Type a valid URL"
+      />
     </form>
   );
 };
