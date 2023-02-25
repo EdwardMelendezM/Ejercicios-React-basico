@@ -80,6 +80,7 @@ export function CalculatorState({ children }) {
       setOperation(null);
       setMemory(result);
       setIsReset(true);
+      setIsDecimal(false);
     }
   };
 
@@ -91,7 +92,22 @@ export function CalculatorState({ children }) {
     setIsDecimal(false);
   }
   function deleteNumber() {
-    setCurrentValue(parseInt(currentValue / 10));
+    const index = currentValue.toString().indexOf(".");
+    if (index > 0) {
+      //Numero decimal
+      const numberOfDecimals = currentValue.toString().slice(index + 1).length;
+      if (numberOfDecimals === 1) {
+        const min = Math.floor(currentValue);
+        setCurrentValue(min);
+      } else {
+        const newNumber = parseFloat(currentValue).toFixed(
+          numberOfDecimals - 1
+        );
+        setCurrentValue(newNumber);
+      }
+    } else {
+      setCurrentValue(parseInt(currentValue / 10));
+    }
   }
   function changeSign() {
     setCurrentValue(currentValue * -1);
@@ -111,6 +127,7 @@ export function CalculatorState({ children }) {
         break;
       case "AC":
         clean();
+        break;
       case "<=":
         deleteNumber();
         break;
