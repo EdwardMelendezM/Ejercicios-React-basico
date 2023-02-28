@@ -1,7 +1,7 @@
 import { forwardRef, useEffect } from "react";
-import TextBlock from "./TextBlock";
+import TodoBlock from "./TodoBlock";
 
-function TextBlockView({ data, onChange, onCreate, focusId }, ref) {
+function TodoBlockView({ data, onChange, onCreate, focusId }, ref) {
   useEffect(() => {
     if (focusId) {
       ref.current.focus();
@@ -9,12 +9,11 @@ function TextBlockView({ data, onChange, onCreate, focusId }, ref) {
   }, [focusId]);
 
   const handleOnChange = (item, e) => {
-    onChange({
-      type: "text",
-      id: item.id,
-      text: e.target.value,
-      completed: item.completed,
-    });
+    if (e.target.name === "checkbox") {
+      onChange({ type: "todo", id: item.id, completed: e.target.checked });
+    } else {
+      onChange({ type: "todo", id: item.id, text: e.target.value });
+    }
   };
   const handleOnKeyDown = (item, e) => {
     if (e.key === "Enter") {
@@ -23,7 +22,7 @@ function TextBlockView({ data, onChange, onCreate, focusId }, ref) {
   };
 
   return data.map((item) => (
-    <TextBlock
+    <TodoBlock
       ref={ref}
       key={item.id}
       item={item}
@@ -33,4 +32,5 @@ function TextBlockView({ data, onChange, onCreate, focusId }, ref) {
     />
   ));
 }
-export default forwardRef(TextBlockView);
+
+export default forwardRef(TodoBlockView);
