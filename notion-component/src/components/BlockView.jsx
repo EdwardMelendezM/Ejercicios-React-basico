@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import TableBlockView from "./blockComponetns/tableBlock/TableBlockView";
 import TextBlockView from "./blockComponetns/textBlock/TextBlockView";
 import TodoBlockView from "./blockComponetns/todoBlock/TodoBlockView";
 import Button from "./Button";
@@ -74,6 +75,21 @@ export default function BlockView() {
           ref={ref}
           focusId={currentItem?.id}
           data={data}
+          onChange={handleChange}
+          onCreate={handleOnCreate}
+        />
+      </div>
+    );
+  }
+  if (type === "table") {
+    return (
+      <div>
+        <TypesSelector />
+        <TableBlockView
+          ref={ref}
+          focusId={currentItem?.id}
+          data={data}
+          columns={properties}
           onChange={handleChange}
           onCreate={handleOnCreate}
         />
