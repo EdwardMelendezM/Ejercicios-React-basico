@@ -10,6 +10,7 @@ function TextBlock({ item, onChange, onKeyDown, focus }, ref) {
   };
   return (
     <Input
+      border
       ref={focus ? ref : null}
       value={item.text}
       onChange={handleOnChange}

@@ -1,29 +1,37 @@
 import { forwardRef } from "react";
 import Button from "../../Button";
+import Cell from "./Cell";
+import Headers from "./Headers";
+import TableBlock from "./TableBlock";
 
-function TableBlockView({ focusId, data, columns, onChange, onCreate }, ref) {
+function TableBlockView(
+  { focusId, data, columns, onChange, onCreate, onCreateNewColumn },
+  ref
+) {
+  const handleNewColumn = () => {
+    const name = prompt("Name of the noew column");
+    if (name) {
+      onCreateNewColumn(name);
+    }
+  };
+  const handleNewRow = () => {
+    onCreate();
+  };
+  const handleOnChange = (rowIndex, property, value) => {
+    const item = (data[rowIndex][property] = value);
+    onChange({
+      type: "table",
+      id: item.id,
+      text: item.text,
+      completed: item.completed,
+      updatedItem: item,
+    });
+  };
   return (
     <div>
-      <Button> Add new column</Button>
-      <Button> Add new row</Button>
-      <table>
-        <thead>
-          <tr>
-            {columns.map((head) => (
-              <th key={crypto.randomUUID()}>{head}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, rowIndex) => (
-            <tr key={crypto.randomUUID()}>
-              {columns.map((cell, cellIndex) => (
-                <td key={crypto.randomUUID()}>{row[cell].toString() ?? ""}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Button onClick={handleNewColumn}> Add new column</Button>
+      <Button onClick={handleNewRow}> Add new row</Button>
+      <TableBlock columns={columns} data={data} onChange={handleOnChange} />
     </div>
   );
 }

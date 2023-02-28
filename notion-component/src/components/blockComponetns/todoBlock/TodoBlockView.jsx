@@ -3,7 +3,7 @@ import TodoBlock from "./TodoBlock";
 
 function TodoBlockView({ data, onChange, onCreate, focusId }, ref) {
   useEffect(() => {
-    if (focusId) {
+    if (focusId && ref.current) {
       ref.current.focus();
     }
   }, [focusId]);

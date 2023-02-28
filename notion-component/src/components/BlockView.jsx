@@ -3,12 +3,13 @@ import TableBlockView from "./blockComponetns/tableBlock/TableBlockView";
 import TextBlockView from "./blockComponetns/textBlock/TextBlockView";
 import TodoBlockView from "./blockComponetns/todoBlock/TodoBlockView";
 import Button from "./Button";
-
+import "./blockView.css";
 export default function BlockView() {
   const ref = useRef(null);
   const [currentItem, setCurrentItem] = useState(null);
   const [type, setType] = useState("text"); //table todo
   const [properties, setProperties] = useState(["id", "text", "completed"]);
+  const [visible, setVisible] = useState(false);
 
   const [data, setData] = useState([
     {
@@ -38,6 +39,14 @@ export default function BlockView() {
         setData(temp);
       }
     }
+    if (type === "table") {
+      const temp = [...data];
+      let editItem = temp.find((i) => i.id === id);
+      if (editItem) {
+        editItem = item.updateItem;
+        setData(temp);
+      }
+    }
   }
   const handleOnCreate = (item) => {
     const newItem = {
@@ -54,22 +63,54 @@ export default function BlockView() {
     setData([...temp]);
     setCurrentItem(newItem);
   };
+  function handleNewColumn(name) {
+    updateProperties(name);
+  }
+  function updateProperties(name) {
+    console.log("Esto es name", name);
+    const newProperties = [...properties, name];
+    const temp = [...data];
+
+    for (let i = 0; i < temp.length; i++) {
+      const item = temp[i];
+      for (let j = 0; j < newProperties.length; j++) {
+        const prop = newProperties[j];
+        if (!item.hasOwnProperty(prop)) {
+          item[prop] = "test";
+        }
+      }
+    }
+
+    setProperties(newProperties);
+    setData(temp);
+  }
 
   function TypesSelector() {
     return (
-      <div>
-        <Button>...</Button>
-        <div>
-          <button onClick={() => setType("text")}>Text</button>
-          <button onClick={() => setType("todo")}>Todo</button>
-          <button onClick={() => setType("table")}>Table</button>
+      <div style={{ position: "relative", marginTop: "20px" }}>
+        <Button menu inverted onClick={() => setVisible(!visible)}>
+          ...
+        </Button>
+        <div
+          className="typesSelectorButtons"
+          style={{ display: visible ? "flex" : "none" }}
+        >
+          <button className="blockViewButton" onClick={() => setType("text")}>
+            Text
+          </button>
+          <button className="blockViewButton" onClick={() => setType("todo")}>
+            Todo
+          </button>
+          <button className="blockViewButton" onClick={() => setType("table")}>
+            Table
+          </button>
         </div>
       </div>
     );
   }
   if (type === "todo") {
     return (
-      <div>
+      <div className="blockViewContainer">
         <TypesSelector />
         <TodoBlockView
           ref={ref}
@@ -83,7 +124,7 @@ export default function BlockView() {
   }
   if (type === "table") {
     return (
-      <div>
+      <div className="blockViewContainer">
         <TypesSelector />
         <TableBlockView
           ref={ref}
@@ -92,13 +133,14 @@ export default function BlockView() {
           columns={properties}
           onChange={handleChange}
           onCreate={handleOnCreate}
+          onCreateNewColumn={handleNewColumn}
         />
       </div>
     );
   }
   //Se mostrar por defecto el componente de texto
   return (
-    <div>
+    <div className="blockViewContainer">
       <TypesSelector />
       <TextBlockView
         ref={ref}
